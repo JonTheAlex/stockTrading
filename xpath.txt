@@ -1,0 +1,9 @@
+//*[@id="DataTables_Table_0_paginate"]/span
+
+//*[@id="DataTables_Table_0_paginate"]/span/a
+
+//*[@id="DataTables_Table_0_paginate"]/span.ellipsis
+
+//*[@id="DataTables_Table_0_paginate"]/span/span
+
+//*[@id="DataTables_Table_1_paginate"]/span/s
