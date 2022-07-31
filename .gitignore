@@ -3,3 +3,4 @@ archive/
 __pycache__/
 .vscode/
 stocks.png
+geckodriver.log
