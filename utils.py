@@ -3,7 +3,7 @@ import random, time, datetime, itertools
 import numpy as np
 import concurrent.futures
 
-record_dir = r'C:\Users\yao56\Documents\Code\Pineapple\records'
+record_dir = r'C:\Users\yao56\Documents\Code\stockTrading\records'
 headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36'}
 proxy_url = 'https://api.proxyscrape.com/?request=getproxies&proxytype=http&timeout=10000&country=all&ssl=all&anonymity=all'
 
@@ -22,12 +22,13 @@ def file_download(record_year):
                         if os.path.exists(record_path):
                             proxy_request(record[0], record_path, file_dir)
                         else:
-                            os.mkdir(record_path)
+                            os.makedirs(record_path)
                             proxy_request(record[0], record_path, file_dir)
     
 def make_record_path(record):
+    year_dir = re.findall(r'/(\d{4})/', record[0])[0]
     sub_dir = record[1].replace('\n','').replace('\"','').replace("'","").replace(".",'').replace(',','')
-    record_path = f'{record_dir}\\{sub_dir}'
+    record_path = f'{record_dir}\\{year_dir}\\{sub_dir}'
 
     return record_path
 
@@ -75,11 +76,11 @@ def get_session(proxy):
 
 def new_file_explorer():
     try:
-        shutil.rmtree('C:\\Users\\yao56\\Documents\\Code\\Pineapple\\records\\New_Files')
+        shutil.rmtree('C:\\Users\\yao56\\Documents\\Code\\stockTrading\\records\\New_Files')
     except:
         print('File directory not found')
 
-    for root, dirs, files in os.walk('C:\\Users\\yao56\\Documents\\Code\\Pineapple\\records', topdown=False):
+    for root, dirs, files in os.walk('C:\\Users\\yao56\\Documents\\Code\\stockTrading\\records', topdown=False):
         for name in files:
             file_path = os.path.join(root, name)
             file_name = pathlib.Path(file_path)
@@ -94,12 +95,12 @@ def new_file_explorer():
                 continue
 
 def move_file(source):
-    destination = 'C:\\Users\\yao56\\Documents\\Code\\Pineapple\\records\\New_Files'
+    destination = 'C:\\Users\\yao56\\Documents\\Code\\stockTrading\\records\\New_Files'
 
     if os.path.exists(destination):
         shutil.copy(source, destination)
     else:
-        os.mkdir(destination)
+        os.makedirs(destination)
         shutil.copy(source, destination)
 
 def save_pdf(filePath, ptr_links):

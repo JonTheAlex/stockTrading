@@ -6,7 +6,7 @@ import pandas as pd
 import utils
         
 # '2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019',
-yearList = ['2020']
+yearList = ['2021','2020','2019','2018','2017','2016','2015','2014','2013','2012','2011','2010','2009','2008']
 
 class Financial_House:
 
@@ -18,9 +18,9 @@ class Financial_House:
     def search_records(self, driver):
         year_records = []
         for year in yearList:
-            time.sleep(5)
+            time.sleep(2)
             self.set_search_criteria(driver, year)
-            time.sleep(5)
+            time.sleep(2)
             year_records.append(self.paginate(driver))
 
             print(year_records)
